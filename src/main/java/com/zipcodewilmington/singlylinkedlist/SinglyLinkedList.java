@@ -94,7 +94,7 @@ public class SinglyLinkedList<E extends Comparable<E>> {
         if (size > 1) {
             for (int i = 0; i < size; i++) {
                 Node currentNode = head;
-                Node nextNode = head.getNext();
+                Node nextNode = head.next;
                 for (int j = 0; j < size - 1; j++) {
                     if ((currentNode.element).compareTo(nextNode.element) > 0) {
                         E temp = (E) currentNode.element;
@@ -108,6 +108,26 @@ public class SinglyLinkedList<E extends Comparable<E>> {
         }
     }
 
+    public void reverse(){
+        Node currentNode = head;
+        Node nextNode = head.next;
+        head.setNext(null);
+        for(int i = 0; i < size - 1; i++){
+            Node temp = nextNode.getNext();
+            nextNode.setNext(currentNode);
+            currentNode = nextNode;
+            nextNode = temp;
+            head = currentNode;
+        }
+    }
+
+    public SinglyLinkedList slice(int start, int end) throws Exception {
+        SinglyLinkedList sliceList = new SinglyLinkedList();
+        for(int i = start; i < end; i++){
+            sliceList.add(get(i));
+        }
+        return sliceList;
+    }
 
     public Node getHead() {
         return head;
